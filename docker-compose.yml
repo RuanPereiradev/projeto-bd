@@ -1,18 +1,16 @@
-version: '3.8'
-
 services:
-  postgres:
-    image: postgres:15
-    container_name: fastify_postgres
+  mysql:
+    image: mysql:8.0
+    container_name: biblioteca_mysql
     restart: always
     environment:
-      POSTGRES_USER: ruan
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: agenda_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: equipe422707
     ports:
-      - "5654:5432"
+      - "3309:3309"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d
 
 volumes:
-  postgres_data:
+  mysql_data:
