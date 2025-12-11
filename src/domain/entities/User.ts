@@ -3,26 +3,26 @@ import { auditableEntity } from "../common/auditableEntity";
 import { userType } from "../enums/userType";
 
 
-export class user extends auditableEntity {
+export class User extends auditableEntity {
 
-    private _id: string;
+    private _userId: number;
     private _name: string;
     private _type: userType;
-    private _endereco: string;
+    private _address: string;
 
-    constructor(name:string,type: userType, endereco: string, id?: string){
+    constructor(name:string,type: userType, address: string, userId: number){
         super();
         if(!name.trim()) throw new Error("O nome não pode ser vazio");
-        this._id = id ?? crypto.randomUUID();
+        this._userId = userId;
         this._name = name;
         this._type = type;
-        this._endereco = endereco;
+        this._address = address;
     }
 
-    get id() { return this._id };
-    get name() { return this._name };
-    get type() { return this._type };
-    get endereco() { return this._endereco };
+    get userId() { return this._userId }
+    get name() { return this._name }
+    get type() { return this._type }
+    get address() { return this._address }
 
 
     softDelete(){
@@ -39,20 +39,20 @@ export class user extends auditableEntity {
 
 
     changeType(newType: userType): Result<void>{
-        if(!newType){
-            return Result.fail("O tipo não pode ser nulo");
+        if(newType === undefined || newType === null){
+            return Result.fail("O tipo não pode ser nulo")
         }
 
         this._type = newType;
         return Result.ok()
     }
 
-    changeEndereco(newEnd: string): Result<void>{
-        if(newEnd){
+    changeAddress(newAddress: string): Result<void>{
+        if(!newAddress.trim()){
             return Result.fail("O endereço não pode ser nulo");
         }
 
-        this._endereco = newEnd;
+        this._address = newAddress;
         return Result.ok();
     }
 }

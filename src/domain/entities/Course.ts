@@ -1,6 +1,6 @@
 import { auditableEntity } from "../common/auditableEntity";
 
-export class course extends auditableEntity{
+export class Course extends auditableEntity{
     private _codCourse: number | null;
     private _nameCourse: string;
 
