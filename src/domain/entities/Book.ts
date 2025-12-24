@@ -71,8 +71,8 @@ export class Book extends auditableEntity{
     }
     
     changeYearLaunch(newYearLaunch: number): Result<void>{
-        if(Number.isInteger(this._yearLaunch)|| this._yearLaunch < 0){
-            return Result.fail("titulo não pode ser vazio ou menor que 0")
+        if(Number.isInteger(newYearLaunch)|| newYearLaunch < 0){
+            return Result.fail("ano de lançamento não pode ser vazio ou menor que 0")
         }
         this._yearLaunch = newYearLaunch;
         return Result.ok();

@@ -26,7 +26,7 @@ export class Exemplar extends auditableEntity{
     }
 
     softDelete(){
-        this._deletedAt = this.deletedAt
+        this._deletedAt = new Date()
     }
 
     changeIsbn(newIsbn: string): Result<void>{

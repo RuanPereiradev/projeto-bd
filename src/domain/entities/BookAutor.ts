@@ -1,16 +1,16 @@
 import { auditableEntity } from "../common/auditableEntity";
 
-export class LivroAutor extends auditableEntity{
+export class BookAutor extends auditableEntity{
     private _id: number;
     private _isbn: string;
-    private _idAuthor: number;
-    private _mainAuthor: number;
+    private _authorId: number;
+    private _mainAuthor: boolean;
 
-    constructor(id: number, isbn: string, idAuthor: number, mainAuthor: number){
+    constructor(id: number, isbn: string, authorId: number, mainAuthor: boolean){
         super();
         this._id = id;
         this._isbn = isbn;
-        this._idAuthor = idAuthor;
+        this._authorId = authorId;
         this._mainAuthor = mainAuthor;
     }
 
@@ -22,11 +22,11 @@ export class LivroAutor extends auditableEntity{
         return this._isbn;
     }
 
-    get idAuthor(): number{
-        return this._idAuthor;
+    get authorId(): number{
+        return this._authorId;
     }
 
-    get mainAuthor(): number{
+    get mainAuthor(): boolean{
         return this._mainAuthor;
     }
 

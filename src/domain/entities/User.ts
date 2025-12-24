@@ -23,7 +23,9 @@ export class User extends auditableEntity {
     get name() { return this._name }
     get type() { return this._type }
     get address() { return this._address }
-
+    get isActive() { return this._isActive }
+    get createdAt(){ return this._createdAt }
+    get updatedAt(){ return this._updatedAt }
 
     softDelete(){
         this._deletedAt = new Date();

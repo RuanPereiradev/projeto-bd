@@ -5,7 +5,7 @@ export class Loan extends auditableEntity{
     private _idUser: number;
     private _startDate: Date;
     private _expectedReturnDate: Date;
-    private _dateDevolution: Date;
+    private _dateDevolution: Date | null;
     
 
 
@@ -15,14 +15,14 @@ export class Loan extends auditableEntity{
         this._idUser = idUser;
         this._startDate = startDate;
         this._expectedReturnDate = expectedReturnDate;
-        this._dateDevolution = dateDevolution;
+        this._dateDevolution = dateDevolution ?? null;
     }
 
     get idLoan(): number{
         return this._idLoan
     }
 
-    get isUser(): number{
+    get idUser(): number{
         return this._idUser
     }
 
@@ -34,7 +34,7 @@ export class Loan extends auditableEntity{
         return this._expectedReturnDate
     }
 
-    get dataRealDevoluvao(): Date{
+    get dateDevolution(): Date | null{
         return this._dateDevolution
     }
 

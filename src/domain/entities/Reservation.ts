@@ -1,4 +1,6 @@
+import { Result } from "@/env/Result";
 import { auditableEntity } from "../common/auditableEntity";
+import { fail } from "assert";
 
 export class Reserva extends auditableEntity{
     private _idUser: number;
@@ -39,5 +41,13 @@ export class Reserva extends auditableEntity{
    
     softDelete(){
         return this._deletedAt = new Date()
+    }
+
+    changeIsbn(newIsbn: string): Result<void>{
+        if(!newIsbn){
+            return Result.fail("isbn obrigatorio")
+        }
+        this._isbn = newIsbn; 
+        return Result.ok()
     }
 }

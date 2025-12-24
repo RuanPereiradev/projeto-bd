@@ -1,3 +1,4 @@
+import { Result } from "@/env/Result";
 import { auditableEntity } from "../common/auditableEntity";
 
 export class Course extends auditableEntity{
@@ -35,9 +36,11 @@ export class Course extends auditableEntity{
         this._deletedAt = new Date();
     }
 
-    changeName(newName: string): void{
-        if(!newName.trim()){
-            throw new Error("O novo nome do curso não pode ser vazio")
-        }
+    changeName(newName: string): Result<void>{
+       if(!newName.trim()){
+        return Result.fail("Name não pode ser nulo")
+       }
+       this._nameCourse = newName.trim();
+       return Result.ok()
     }
 }
