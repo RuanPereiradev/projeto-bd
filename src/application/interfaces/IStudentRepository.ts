@@ -1,6 +1,6 @@
 import { Result } from "@/env/Result";
-import { User } from "../entities/User";
-import { Student } from "../entities/Student";
+import { User } from "../../domain/entities/User";
+import { Student } from "../../domain/entities/Student";
 
 export interface IStudentRepository{
     create(student: Student): Promise<Result<Student>>;
@@ -8,4 +8,7 @@ export interface IStudentRepository{
     findAll(): Promise<Result<Student[]>>
     update(student: Student): Promise<Result<Student>>
     softDelete(id: number): Promise<Result<void>>
+
+    findByCodCourse(codCourse: number): Promise<Result<Student>>
+    findByRegistration(registration: string): Promise<Result<Student>>
 }

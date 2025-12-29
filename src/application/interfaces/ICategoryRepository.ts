@@ -1,6 +1,6 @@
 import { Result } from "@/env/Result";
-import { Employee } from "../entities/Employee";
-import { Category } from "../entities/Category";
+import { Employee } from "../../domain/entities/Employee";
+import { Category } from "../../domain/entities/Category";
 
 export interface ICategoryRepository{
     create(category: Category): Promise<Result<Category>>;

@@ -1,5 +1,5 @@
 import { Result } from "@/env/Result";
-import {BookAutor} from "../entities/BookAutor"
+import { BookAutor } from "@/domain/entities/BookAutor";
 
 export interface IBookAuthorRepository{
         create(BookAutor:BookAutor): Promise<Result<BookAutor>>;

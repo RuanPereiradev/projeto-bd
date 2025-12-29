@@ -86,6 +86,20 @@ export class Book extends auditableEntity{
         return Result.ok();
     }
 
+    changeCodCategory(newCodCategory: number): Result<void>{
+        if(Number.isInteger(newCodCategory) || newCodCategory<= 0){
+            return Result.fail("codigo da categoria nao pode ser vazio")
+        }
+        this._codCategory = newCodCategory;
+        return Result.ok();
+    }
+    changeCodSubCategory(newCodSubCategory: number): Result<void>{
+        if(Number.isInteger(newCodSubCategory) || newCodSubCategory <= 0){
+            return Result.fail("codigo da categoria nao pode ser vazio")
+        }
+        this._codCategory = newCodSubCategory;
+        return Result.ok();
+    }
     
 
 }

@@ -1,7 +1,7 @@
+import { Teacher } from "@/domain/entities/Teacher";
+import { RegimeType } from "@/domain/enums/RegimeType";
 import { Result } from "@/env/Result";
-import { User } from "../entities/User";
-import { Teacher } from "../entities/Teacher";
-import { RegimeType } from "../enums/RegimeType";
+
 
 export interface ITeacherRepository{
     create(teacher:Teacher): Promise<Result<Teacher>>;
@@ -13,6 +13,7 @@ export interface ITeacherRepository{
 
     findByWorkRegime(workRegime: RegimeType): Promise<Result<Teacher>>
     findByCourseCode(courseCode: number): Promise<Result<Teacher>>
+    findByMatSiap(matSiap: string): Promise<Result<Teacher>>
     
 
 }

@@ -1,6 +1,6 @@
 import { Result } from "@/env/Result";
-import { Loan } from "../entities/Loan";
-import { LoanItem } from "../entities/LoanItem";
+import { Loan } from "../../domain/entities/Loan";
+import { LoanItem } from "../../domain/entities/LoanItem";
 
 export interface ILoanItemRepository{
     create(loanItem:LoanItem): Promise<Result<LoanItem>>;
@@ -10,4 +10,5 @@ export interface ILoanItemRepository{
     softDelete(id: number): Promise<Result<void>>
 
     findByStartDate(startDate: Date): Promise<Result<LoanItem[]>>
+    findByIdExemplar(idExemplar: number) : Promise<Result<LoanItem>>
 }

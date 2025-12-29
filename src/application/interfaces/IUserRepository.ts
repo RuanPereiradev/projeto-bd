@@ -1,5 +1,5 @@
+import { User } from "@/domain/entities/User";
 import { Result } from "@/env/Result";
-import { User } from "../entities/User";
 
 export interface IUserRepository{
     create(user:User): Promise<Result<User>>;

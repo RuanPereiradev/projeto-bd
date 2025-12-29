@@ -3,16 +3,16 @@ import { auditableEntity } from "../common/auditableEntity";
 export class Employee extends auditableEntity{
 
     private _userId: number;
-    private _mat: string;
+    private _registration: string;
 
     constructor(mat: string, userId: number){
         super(),
         this._userId = userId;
-        this._mat = mat;
+        this._registration = mat;
     }
 
     get userId(): number { return this._userId }
-    get mat(): string { return this._mat }
+    get mat(): string { return this._registration }
     get isActive(): boolean { return this._isActive }
     get deletedAt(): Date | null { return this._deletedAt }
 

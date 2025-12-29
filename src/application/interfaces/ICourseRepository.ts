@@ -1,5 +1,5 @@
 import { Result } from "@/env/Result";
-import { Course } from "../entities/Course";
+import { Course } from "../../domain/entities/Course";
 
 export interface ICourseRepository{
         create(course:Course): Promise<Result<Course>>;

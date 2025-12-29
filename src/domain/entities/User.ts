@@ -1,16 +1,20 @@
 import { Result } from "@/env/Result";
 import { auditableEntity } from "../common/auditableEntity";
 import { userType } from "../enums/userType";
+import { LoanPolicy } from "../strategy/loan/LoanPolicy";
+import { StudentLoanPolicy } from "../strategy/loan/StudentLoanPolicy";
+import { EmployeeLoanPolicy } from "../strategy/loan/EmployeeLoanPolicy";
+import { TeacherLoanPolicy } from "../strategy/loan/TeacherLoanPolicy";
 
 
 export class User extends auditableEntity {
 
-    private _userId: number;
+    private _userId?: number;
     private _name: string;
     private _type: userType;
     private _address: string;
 
-    constructor(name:string,type: userType, address: string, userId: number){
+    constructor(name:string,type: userType, address: string, userId?: number){
         super();
         if(!name.trim()) throw new Error("O nome não pode ser vazio");
         this._userId = userId;
@@ -27,6 +31,21 @@ export class User extends auditableEntity {
     get createdAt(){ return this._createdAt }
     get updatedAt(){ return this._updatedAt }
 
+    getLoanPolicy(): LoanPolicy{
+        switch(this._type){
+            case userType.ALUNO:
+                return new StudentLoanPolicy();
+
+            case userType.FUNCIONARIO:
+                return new EmployeeLoanPolicy();
+            
+            case userType.PROFESSOR:
+                return new TeacherLoanPolicy();
+
+            default:
+                throw new Error("Tipo do usuário inválido");
+        }
+    }
     softDelete(){
         this._deletedAt = new Date();
     }
