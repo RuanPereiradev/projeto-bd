@@ -12,6 +12,8 @@ export class Teacher extends auditableEntity{
 
     constructor( userId: number, matSiape: string, address: string, workRegime: RegimeType, courseCode: number, hireDate: Date){
         super();
+        if(!userId)
+            throw new Error("UserId obrigatório")
         if(!matSiape.trim()) throw new Error("SIAP inválido")
         if(!Object.values(RegimeType).includes(workRegime)){
             throw new Error("Regime de trabalho inválido")

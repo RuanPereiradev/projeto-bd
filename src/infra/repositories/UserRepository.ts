@@ -5,7 +5,8 @@ import { Pool } from "mysql2/typings/mysql/lib/Pool";
 import { db } from "../config/db";
 
 export class UserRepository implements IUserRepository{
-   async create(user: User): Promise<   Result<User>> {
+   async create(user: User): Promise<Result<User>> {
+        try {
         const [result] : any = await db.query(
             `INSERT INTO Usuario (nome, tipo, endereco, ativo)
             VALUES (?, ?, ?, ?)`,
@@ -24,6 +25,15 @@ export class UserRepository implements IUserRepository{
         );
 
         return Result.ok(createdUser);
+
+        }catch (error: any) {
+            console.error("[UserRepository.create]", error)
+
+            if(error.code === "ER_DUP_ENTRY"){
+                return Result.fail("Usuário já cadastrado")
+            }
+            return Result.fail("Erro ao criar usuário")
+        }
     }
     async findById(id: number): Promise<Result<User | null>> {
        try {
@@ -84,7 +94,7 @@ export class UserRepository implements IUserRepository{
             )
             return Result.ok(user)
         } catch (error:any) {
-            return Result.fail("Erro desconhecido no update")
+            return Result.fail("Erro ao editar usuário")
         }
     }
     async softDelete(id: number): Promise<Result<void>> {
@@ -101,7 +111,7 @@ export class UserRepository implements IUserRepository{
             );
             return Result.ok()
         } catch (error:any) {
-            return Result.fail("Erro desconhecido no soft delete")
+            return Result.fail("Erro ao desativar usuário")
         }
     }
     

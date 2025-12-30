@@ -8,7 +8,7 @@ export class Student extends auditableEntity{
     private _dateEntry: Date;
     private _expectedCompletionDate: Date;
 
-    constructor(registration: string, codCourse: number, dateEntry: Date, expectedCompletionDate: Date, userId: number){
+    constructor(userId: number,registration: string, codCourse: number, dateEntry: Date, expectedCompletionDate: Date){
         super();
         if(userId === null || userId === undefined ){
             throw new Error("UserId obrigatório")
