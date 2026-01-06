@@ -1,4 +1,4 @@
-import { Result } from "@/env/Result";
+import { Result } from "../../env/Result";
 import { auditableEntity } from "../common/auditableEntity";
 
 export class Student extends auditableEntity{

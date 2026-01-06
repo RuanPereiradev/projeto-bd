@@ -1,10 +1,10 @@
-import { Result } from "@/env/Result";
 import { auditableEntity } from "../common/auditableEntity";
 import { userType } from "../enums/userType";
 import { LoanPolicy } from "../strategy/loan/LoanPolicy";
 import { StudentLoanPolicy } from "../strategy/loan/StudentLoanPolicy";
 import { EmployeeLoanPolicy } from "../strategy/loan/EmployeeLoanPolicy";
 import { TeacherLoanPolicy } from "../strategy/loan/TeacherLoanPolicy";
+import { Result } from "../../env/Result";
 
 
 export class User extends auditableEntity {

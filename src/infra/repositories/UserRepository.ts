@@ -1,9 +1,8 @@
-import { IUserRepository } from "@/application/interfaces/IUserRepository";
-import { User } from "@/domain/entities/User";
-import { Result } from "@/env/Result";
-import { Pool } from "mysql2/typings/mysql/lib/Pool";
+
+import { IUserRepository } from "../../application/interfaces/IUserRepository";
+import { User } from "../../domain/entities/User";
+import { Result } from "../../env/Result";
 import { db } from "../config/db";
-import { Student } from "@/domain/entities/Student";
 
 export class UserRepository implements IUserRepository{
    async create(user: User): Promise<Result<User>> {
@@ -124,6 +123,7 @@ export class UserRepository implements IUserRepository{
             return Result.fail("Erro ao editar usuário")
         }
     }
+
     async softDelete(id: number): Promise<Result<void>> {
         try {
             if(!id){

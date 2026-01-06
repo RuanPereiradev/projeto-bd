@@ -1,8 +1,8 @@
-import { IStudentRepository } from "@/application/interfaces/IStudentRepository";
-import { Student } from "@/domain/entities/Student";
-import { Result } from "@/env/Result";
+import { IStudentRepository } from "../../application/interfaces/IStudentRepository";
+import { Student } from "../../domain/entities/Student";
+import { Result } from "../../env/Result";
 import { db } from "../config/db";
-import { User } from "@/domain/entities/User";
+
 
 export class StudentRepository implements IStudentRepository{
    

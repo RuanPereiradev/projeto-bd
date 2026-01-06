@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "crypto";
 
 export class ApiResponse<T>{
     public readonly _success : boolean;
@@ -7,7 +7,7 @@ export class ApiResponse<T>{
     public readonly _traceId : string;
 
     constructor(success: boolean, data?: T | null, errors?: string[] | null){
-       this._traceId = uuidv4();
+       this._traceId = randomUUID();
        this._success = success;
        this._data = data ?? null;
        this._errors = errors ?? null;

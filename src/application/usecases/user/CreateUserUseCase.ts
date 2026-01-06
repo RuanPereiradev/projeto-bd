@@ -1,9 +1,7 @@
-import { CreateUserDto } from "@/application/dto/userDtos/CreateUserDto";
-import { IUserRepository } from "@/application/interfaces/IUserRepository";
-import { User } from "@/domain/entities/User";
-import { userType } from "@/domain/enums/userType";
-import { Result } from "@/env/Result";
-import { request } from "http";
+import { User } from "../../../domain/entities/User";
+import { Result } from "../../../env/Result";
+import { CreateUserDto } from "../../dto/userDtos/CreateUserDto";
+import { IUserRepository } from "../../interfaces/IUserRepository";
 
 
 export class CreateUserUseCase{

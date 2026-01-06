@@ -324,7 +324,7 @@ Funcionario
 
 ## 🧑‍🎓 1. Usuários do Sistema
 
-### RF01 – Manter usuários
+### RF01 – Manter usuários 
 
 O sistema deve permitir cadastrar, consultar, atualizar e desativar usuários do tipo:
 
@@ -334,7 +334,7 @@ Professor
 
 Funcionário
 
-### RF02 – Identificar tipo de usuário
+### RF02 – Identificar tipo de usuário 
 
 O sistema deve identificar o tipo do usuário (ALUNO, PROFESSOR ou FUNCIONÁRIO) no momento do acesso, pois:
 
@@ -342,7 +342,7 @@ O tipo influencia regras de empréstimo
 
 O tipo define prazos e limites
 
-### RF03 – Ativar e desativar usuário
+### RF03 – Ativar e desativar usuário -> 
 
 O sistema deve permitir ativar ou desativar um usuário, impedindo usuários inativos de:
 
@@ -351,7 +351,7 @@ Realizar empréstimos
 Realizar reservas
 
 ## 🎓 2. Alunos
-### RF04 – Manter alunos
+### RF04 – Manter alunos ->
 
 O sistema deve permitir cadastrar, consultar, atualizar e desativar alunos, associando:
 
@@ -363,17 +363,17 @@ Data de ingresso
 
 Data de conclusão prevista
 
-### RF05 – Bloquear aluno concluído
+### RF05 – Bloquear aluno concluído -> 
 
 O sistema deve impedir o cadastro de alunos cuja data de conclusão prevista já tenha sido atingida
 (regra aplicada via trigger no banco).
 
-### RF06 – Consultar alunos por curso
+### RF06 – Consultar alunos por curso -> 
 
 O sistema deve permitir consultar alunos vinculados a um determinado curso.
 
 ## 👨‍🏫 3. Professores
-### RF07 – Manter professores
+### RF07 – Manter professores -> 
 
 O sistema deve permitir cadastrar, consultar, atualizar e desativar professores, associando:
 

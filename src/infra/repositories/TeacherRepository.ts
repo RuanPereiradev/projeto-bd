@@ -1,9 +1,8 @@
-import { ITeacherRepository } from "@/application/interfaces/ITeacherRepository";
-import { Teacher } from "@/domain/entities/Teacher";
-import { RegimeType } from "@/domain/enums/RegimeType";
-import { Result } from "@/env/Result";
+import { TeacherByCourseDto } from "../../application/dto/teacherDtos/TeacherByCourseDto";
+import { ITeacherRepository } from "../../application/interfaces/ITeacherRepository";
+import { Teacher } from "../../domain/entities/Teacher";
+import { Result } from "../../env/Result";
 import { db } from "../config/db";
-import { TeacherByCourseDto } from "@/application/dto/teacherDtos/TeacherByCourseDto";
 
 export class TeacherRepository implements ITeacherRepository{
     async create(teacher: Teacher): Promise<Result<Teacher>> {
@@ -154,7 +153,7 @@ export class TeacherRepository implements ITeacherRepository{
             JOIN Curso c ON p.cod_curso = c.cod_curso
             WHERE c.cod_curso = ?
             ORDER BY u.nome
-            `[courseCode]
+            `,[courseCode]
            );
             return Result.ok(rows)
         } catch (error: any) {

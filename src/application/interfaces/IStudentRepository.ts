@@ -1,6 +1,6 @@
-import { Result } from "@/env/Result";
 import { User } from "../../domain/entities/User";
 import { Student } from "../../domain/entities/Student";
+import { Result } from "../../env/Result";
 
 export interface IStudentRepository{
     create(student: Student): Promise<Result<Student>>;

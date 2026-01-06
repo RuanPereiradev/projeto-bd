@@ -2,16 +2,11 @@
   "name": "biblioteca-academica",
   "version": "1.0.0",
   "description": "Sistema de Biblioteca Acadêmica com Fastify",
-  "main": "src/api/server.ts",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/api/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node dist/api/server.js",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f",
-    "docker:restart": "docker-compose restart",
-    "test": "echo \"No tests yet\" && exit 0"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
@@ -20,22 +15,15 @@
     "@fastify/sensible": "^5.2.0",
     "@fastify/swagger": "^8.13.0",
     "@fastify/swagger-ui": "^1.9.3",
-    "@sinclair/typebox": "^0.32.20",
-    "bcrypt": "^5.1.1",
-    "crypto-randomuuid": "^1.0.0",
     "dotenv": "^16.3.1",
     "fastify": "^4.24.3",
-    "fastify-plugin": "^4.5.1",
-    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.1",
+    "uuid": "^13.0.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.4.5",
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
-    "@typescript-eslint/parser": "^6.7.0",
+    "@types/uuid": "^10.0.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6"
