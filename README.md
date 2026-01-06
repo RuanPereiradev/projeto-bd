@@ -321,7 +321,9 @@ Funcionario
 
 
 # 📚 Sistema de Biblioteca – Requisitos Funcionais (RF)
+
 ## 🧑‍🎓 1. Usuários do Sistema
+
 ### RF01 – Manter usuários
 
 O sistema deve permitir cadastrar, consultar, atualizar e desativar usuários do tipo:
@@ -340,7 +342,7 @@ O tipo influencia regras de empréstimo
 
 O tipo define prazos e limites
 
-RF03 – Ativar e desativar usuário
+### RF03 – Ativar e desativar usuário
 
 O sistema deve permitir ativar ou desativar um usuário, impedindo usuários inativos de:
 
@@ -366,7 +368,7 @@ Data de conclusão prevista
 O sistema deve impedir o cadastro de alunos cuja data de conclusão prevista já tenha sido atingida
 (regra aplicada via trigger no banco).
 
-RF06 – Consultar alunos por curso
+### RF06 – Consultar alunos por curso
 
 O sistema deve permitir consultar alunos vinculados a um determinado curso.
 

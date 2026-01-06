@@ -5,9 +5,7 @@ import { db } from "../config/db";
 import { User } from "@/domain/entities/User";
 
 export class StudentRepository implements IStudentRepository{
-    findByRegistration(registration: string): Promise<Result<Student>> {
-        throw new Error("Method not implemented.");
-    }
+   
     async create(student: Student): Promise<Result<Student>> {
         try {
             await db.query(
@@ -40,16 +38,17 @@ export class StudentRepository implements IStudentRepository{
             return Result.fail("Erro ao criar estudante")
         }
     }
+
     async findById(id: number): Promise<Result<Student | null>> {
         try {
             const [rows]: any = await db.query(
-            `
-            SELECT id_usuario, matricula, cod_curso, data_ingresso, data_conclusao_prevista
-            FROM Estudante
-            WHERE id_usuario = ? AND ativo = 1
-            `,
-            [id]
-        );
+                `
+                SELECT id_usuario, matricula, cod_curso, data_ingresso, data_conclusao_prevista
+                FROM Aluno
+                WHERE id_usuario = ? AND ativo = 1
+                `,
+                [id]
+            );
 
         if(rows.length === 0){
             return Result.ok(null)
@@ -58,11 +57,11 @@ export class StudentRepository implements IStudentRepository{
         const row = rows[0]
 
         const student = new Student(
-            row.userId,
-            row.registration,
-            row.codCourse,
-            row.dateEntry,
-            row.expectedCompletionDate,
+            row.id_usuario,
+            row.matricula,
+            row.cod_curso,
+            new Date(row.data_ingresso),
+            new Date(row.data_conclusao_prevista),
         );
 
         return Result.ok<Student>(student)
@@ -72,8 +71,37 @@ export class StudentRepository implements IStudentRepository{
             return Result.fail("Erro ao acessar o banco de dados");         
         }
     }
-    findAll(): Promise<Result<Student[]>> {
-        throw new Error("Method not implemented.");
+
+    async findAll(): Promise<Result<Student[]>> {
+        try {
+            const [rows]: any = await db.query(
+                `SELECT 
+                    s.id_usuario,
+                    s.matricula,
+                    s.cod_curso,
+                    s.data_ingresso,
+                    s.data_conclusao_prevista
+                FROM Aluno s
+                JOIN Usuario u ON u.id_usuario = s.id_usuario
+                WHERE u.deleted_at IS NULL`,
+            );
+
+            const student = rows.map((row: any) =>
+                new Student(
+                    row.id_usuario,
+                    row.matricula,
+                    row.cod_curso,
+                    new Date(row.data_ingresso),
+                    new Date(row.data_conclusao_prevista)
+                )
+            );
+
+            return Result.ok(student);
+
+        } catch (error:any) {
+            console.error("[studentRepository.findAll].findAll", error)
+            return Result.fail("Erro ao listar estudante")
+        }
     }
     async update(student: Student): Promise<Result<Student>> {
         try {
@@ -82,7 +110,7 @@ export class StudentRepository implements IStudentRepository{
             }
             await db.query(
                 `
-                UPDATE Estudante
+                UPDATE Aluno
                 SET cod_curso = ?,
                     data_conclusao_prevista = ?
                 WHERE id_usuario = ?
@@ -119,11 +147,11 @@ export class StudentRepository implements IStudentRepository{
 
         const students = rows.map((row: any)=> 
             new Student(
-                row.userId,
-                row.registration,
-                row.codCourse,
-                new Date(row.dateEntry),
-                new Date(row.expectedCompletionDate),
+                row.id_usuario,
+                row.matricula,
+                row.cod_curso,
+                new Date(row.data_ingresso),
+                new Date(row.data_conclusao_prevista)
             )
         );
 
@@ -134,6 +162,38 @@ export class StudentRepository implements IStudentRepository{
             return Result.fail("Erro ao acessar o banco de dados");
         }
     }
-    
+    async findByRegistration(registration: string): Promise<Result<Student>> {
+        try {
+            const [rows]: any = await db.query(
+                `SELECT 
+                    a.id_usuario,
+                    a.matricula,
+                    a.cod_curso,
+                    a.data_ingresso,
+                    a.data_conclusao_prevista
+                FROM Aluno a
+                JOIN Usuario u ON u.id_usuario = a.id_usuario
+                WHERE a.matricula = ?
+                AND u.ativo = 1 `,
+                [registration]
+            );
 
+            const students = rows.map((row: any)=> 
+                new Student(
+                    row.userId,
+                    row.registration,
+                    row.codCourse,
+                    new Date(row.data_ingresso),
+                     new Date(row.data_conclusao_prevista),
+                )
+            );
+
+            return Result.ok(students)
+
+        } catch (error: any) {
+            console.log("Erro ao buscar registro de aluno: ", error)
+            return Result.fail(error.message)
+        }
+
+    }    
 }

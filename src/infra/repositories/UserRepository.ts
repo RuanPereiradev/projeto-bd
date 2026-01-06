@@ -3,6 +3,7 @@ import { User } from "@/domain/entities/User";
 import { Result } from "@/env/Result";
 import { Pool } from "mysql2/typings/mysql/lib/Pool";
 import { db } from "../config/db";
+import { Student } from "@/domain/entities/Student";
 
 export class UserRepository implements IUserRepository{
    async create(user: User): Promise<Result<User>> {
@@ -67,8 +68,34 @@ export class UserRepository implements IUserRepository{
        }
 
     }
-    findAll(): Promise<Result<User[]>> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<Result<User[]>> {
+        try {
+            const [rows]: any = await db.query(
+                `SELECT
+                    id_usuario.
+                    nome,
+                    tipo,
+                    endereco,
+                FROM Usuario
+                WHERE id_usuario = ? AND ativo = 1
+                `
+            );
+
+            const  user = rows.map((row: any)=>
+                new User(
+                    row.userId,
+                    row.name,
+                    row.type,
+                    row.address
+                )
+            );
+
+            return Result.ok(user);
+
+        } catch (error: any) {
+            console.error("[userRepository.findAll]: ",error);
+            return Result.fail("Erro ao listar todos os usuários")
+        }
     }
     async update(user: User): Promise<Result<User>> {
         try {
